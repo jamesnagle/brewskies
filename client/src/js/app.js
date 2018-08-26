@@ -2,11 +2,12 @@ import React from 'react';
 import axios from 'axios';
 
 export default class App extends React.Component {
-    state = {
-        shitHead: 'ReactJS',
-        breweries: []
+    constructor(props) {
+        this.state = {
+            shitHead: 'ReactJS'
+        }
     }
-    
+
     componentDidMount() {
         axios.get('/api/zipcode/87114')
             .then(function (response) {
@@ -23,7 +24,9 @@ export default class App extends React.Component {
         return (
             <ul>
                 <li>{this.state.shitHead}</li>
-                {list}
+                {this.state && this.state.breweries &&
+                    <li>Loaded</li>
+                }
             </ul>
         );
     }
