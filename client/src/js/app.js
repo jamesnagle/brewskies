@@ -17,11 +17,6 @@ export default class App extends React.Component {
     }
     
     render() {
-        let list = (
-            this.state.breweries.map((brewery, i) => {
-                <li key={brewery._id}>{brewery.name}</li>
-            })
-        );
         return (
             <ul>
                 <li>{this.state.shitHead}</li>
