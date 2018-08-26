@@ -7,6 +7,6 @@ import App from './app';
 let breweries = [];
 
 ReactDOM.render(
-    <App breweries={breweries} />,
+    <App />,
     document.getElementById('root')
 );

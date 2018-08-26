@@ -22,6 +22,7 @@ export default class App extends React.Component {
                 <li>{this.state.shitHead}</li>
                 {this.state && this.state.breweries &&
                     this.state.breweries.forEach(function(brewery, i) {
+                        console.log(brewery.name);
                         <li>{brewery.name}</li>
                     })
                 }
