@@ -1,5 +1,7 @@
 import React from 'react';
 import axios from 'axios';
+import SearchBar from './components/SearchBar.js';
+
 
 class App extends React.Component {
     constructor(props) {
@@ -7,36 +9,46 @@ class App extends React.Component {
         this.state = {
             shitHead: 'ReactJS',
             isLoaded: false,
-            breweries: []
+            breweries: [],
+            searchValue: "Enter Zip code...",
+            searchTerm: ''
         }
     }
 
-    componentDidMount() {
-        axios.get('/api/zipcode/87114')
-            .then(function (response) {
-                this.setState({
-                    isLoaded: true,
-                    breweries: response.data
-                });
-            }.bind(this));
+    componentDidUpdate(prevProps, prevState) {
+        let searchTerm = this.state.searchTerm
+        if (prevState.searchTerm !== searchTerm) {
+            this.queryDatabaseByZipCode(searchTerm)
+        }     
     }
+
+    queryDatabaseByZipCode(zipcode) {
+        axios.get('/api/zipcode/' + zipcode)
+        .then(function (response) {
+            this.setState({
+                isLoaded: true,
+                breweries: response.data
+            });
+        }.bind(this));
+    }
+
+    queryDatabaseHandler(searchValue) {
+        this.setState({ 
+            searchTerm: searchValue
+        });
+    }
+
+    
     
     render() {
-        let { isLoaded, breweries, shitHead } = this.state;
-        if (!isLoaded) {
-            return (
-                <p>Not Loaded</p>
-            );
-        } else {
-            return (
-                <ul>
-                    <li>{shitHead}</li>
-                    {breweries.map((brewery, i) => (
-                        <li key={brewery._id}>{brewery.name}</li>
-                    ))}
-                </ul>
-            );
-        }
+        return (
+            
+            <div className="container">
+                <SearchBar queryDatabaseHandler={this.queryDatabaseHandler.bind(this)}/> 
+            </div>
+            
+            
+        ); 
     }
 }
 
