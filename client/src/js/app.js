@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
-import SearchBar from './components/SearchBar.js';
+import SearchBar from './components/SearchBar';
+import CardWrapper from './components/CardWrapper';
 
 
 class App extends React.Component {
@@ -42,12 +43,10 @@ class App extends React.Component {
     
     render() {
         return (
-            
             <div className="container">
-                <SearchBar queryDatabaseHandler={this.queryDatabaseHandler.bind(this)}/> 
-            </div>
-            
-            
+                <SearchBar queryDatabaseHandler={this.queryDatabaseHandler.bind(this)}/>
+                <CardWrapper searchResults={this.state.breweries} isLoaded={this.state.isLoaded} />
+            </div>          
         ); 
     }
 }
