@@ -18,7 +18,9 @@ export default class App extends React.Component {
     render() {
         return (
             <ul>
-                <li>Test</li>
+                {this.state.breweries.data.map((brewery) => {
+                    <li>{brewery.name}</li>
+                })}
             </ul>
         );
     }
