@@ -16,5 +16,7 @@ db.once('open', function() {
 
     app.get('/api/breweries', api.getAll);
 
+    app.get('/api/zipcode/:zip', api.getByZipcode);
+
     app.listen(3000, () => console.log('Listening on port 3000'));
 });
