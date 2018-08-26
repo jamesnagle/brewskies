@@ -22,7 +22,7 @@ export default class App extends React.Component {
                 <li>{this.state.shitHead}</li>
                 {this.state && this.state.breweries &&
                     this.state.breweries.map(function(brewery) {
-                        <li key={brewery._id}>{brewery.name}</li>
+                        <li>{brewery.name}</li>
                     })
                 }
             </ul>
