@@ -12,14 +12,16 @@ export default class App extends React.Component {
 
         axios.get('/api/zipcode/87114')
         .then((response) => {
-            this.setState({breweries: response});
+            this.setState({breweries: response.data});
         });
     }
     render() {
         console.log(this.state);
         return (
             <ul>
-                <li>test</li>
+                {this.state.breweries.forEach((brewery) => {
+                    <li key={brewery.id}>{brewery.name}</li>
+                })}
             </ul>
         );
     }
