@@ -2,32 +2,43 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 
-export default class App extends React.Component {
+class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            shitHead: 'ReactJS'
+            shitHead: 'ReactJS',
+            isLoaded: false,
+            breweries: []
         }
     }
 
     componentDidMount() {
         axios.get('/api/zipcode/87114')
             .then(function (response) {
-                this.setState({breweries: response.data});
+                this.setState({
+                    isLoaded: true,
+                    breweries: response.data
+                });
             }.bind(this));
     }
     
     render() {
-        return (
-            <ul>
-                <li>{this.state.shitHead}</li>
-                {this.state && this.state.breweries &&
-                    this.state.breweries.forEach(function(brewery, i) {
-                        console.log(brewery.name);
-                        <li>{brewery.name}</li>
-                    })
-                }
-            </ul>
-        );
+        let { isLoaded, breweries, shitHead } = this.state;
+        if (!isLoaded) {
+            return (
+                <p>Not Loaded</p>
+            );
+        } else {
+            return (
+                <ul>
+                    <li>{shitHead}</li>
+                    {breweries.map((brewery, i) => (
+                            <li>{brewery.name}</li>
+                    ))}
+                </ul>
+            );
+        }
     }
 }
+
+export default App;
