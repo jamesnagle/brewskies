@@ -17,7 +17,7 @@ const brewerySchema = new Schema({
     province: String,
     twitter: String,
     websites: String
-});
+}, {collection: 'breweries'});
 
 const Brewery = mongoose.model('Brewery', brewerySchema);
 
