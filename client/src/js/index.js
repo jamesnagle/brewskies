@@ -6,11 +6,6 @@ import App from './app';
 
 let breweries = [];
 
-axios.get('/api/zipcode/87114')
-    .then(function (response) {
-        breweries = response.data
-    });
-
 ReactDOM.render(
     <App breweries={breweries} />,
     document.getElementById('root')

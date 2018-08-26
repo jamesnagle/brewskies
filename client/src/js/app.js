@@ -4,18 +4,18 @@ import axios from 'axios';
 export default class App extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
+        state = {
             shitHead: 'ReactJS',
             breweries: []
         }
     }
     componentDidMount() {
+        axios.get('/api/zipcode/87114')
+            .then(function (response) {
+                this.setState({breweries: response.data});
+            }.bind(this));
     }
     
-    componentWillReceiveProps(nextProps) {
-        console.log(nextProps);
-    }
-
     render() {
         let list = (
             this.state.breweries.map((brewery, i) => {
