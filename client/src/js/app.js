@@ -5,6 +5,7 @@ export default class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            shitHead: 'ReactJS',
             breweries: []
         }
     }
@@ -23,6 +24,7 @@ export default class App extends React.Component {
         );
         return (
             <ul>
+                <li>{this.state.shitHead}</li>
                 {list}
             </ul>
         );
