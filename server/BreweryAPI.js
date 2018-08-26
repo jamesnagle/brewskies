@@ -1,4 +1,4 @@
-import Brewery from './server/models/Brewery';
+const Brewery = require('./server/models/Brewery');
 
 class BreweryAPI {
     contructor(mongoose) {
@@ -16,4 +16,4 @@ class BreweryAPI {
         return false;
     }
 }
-export default BreweryAPI;
+module.exports = BreweryAPI;

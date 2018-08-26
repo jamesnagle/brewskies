@@ -20,4 +20,4 @@ const schema = mongoose.Schema({
 
 const Brewery = mongoose.Model('Brewery', schema);
 
-export default Brewery;
+module.exports = Brewery;

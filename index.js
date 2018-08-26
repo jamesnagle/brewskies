@@ -7,7 +7,7 @@ const db = mongoose.connection;
 
 db.on('error', console.error.bind(console, 'connection error:'));
 
-import BreweryAPI from './server/BreweryAPI';
+const BreweryAPI = require('./server/BreweryAPI');
 
 db.once('open', function() {
     app.use(express.static('client/public'));
