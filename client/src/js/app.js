@@ -19,7 +19,7 @@ export default class App extends React.Component {
         return (
             <ul>
                 {this.state.breweries.map((brewery) => {
-                    console.log(brewery);
+                    console.log(brewery.name);
                     <li key={brewery._id}>{brewery.name}</li>
                 })}
             </ul>
