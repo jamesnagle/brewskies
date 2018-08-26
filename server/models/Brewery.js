@@ -19,6 +19,6 @@ const brewerySchema = new Schema({
     websites: String
 });
 
-const Brewery = mongoose.Model('Brewery', brewerySchema);
+const Brewery = mongoose.model('Brewery', brewerySchema);
 
 module.exports = Brewery;
