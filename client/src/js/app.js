@@ -16,11 +16,10 @@ export default class App extends React.Component {
         });
     }
     render() {
+        console.log(this.state);
         return (
             <ul>
-                {this.state.breweries.data.map((brewery) => {
-                    <li>{brewery.name}</li>
-                })}
+                <li>test</li>
             </ul>
         );
     }
