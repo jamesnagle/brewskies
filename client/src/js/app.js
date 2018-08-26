@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import axios from 'axios';
 
 class App extends React.Component {
@@ -33,7 +32,7 @@ class App extends React.Component {
                 <ul>
                     <li>{shitHead}</li>
                     {breweries.map((brewery, i) => (
-                            <li key={brewery._id}>{brewery.name}</li>
+                        <li key={brewery._id}>{brewery.name}</li>
                     ))}
                 </ul>
             );
