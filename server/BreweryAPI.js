@@ -13,6 +13,7 @@ class BreweryAPI {
     }
     getByZipcode(req, res) {
         let zipcode = parseInt(req.params.zip);
+        console.log(zipcode);
         
         Brewery.find({postalCode: zipcode}, function(err, breweries) {
             if (err) return this.handleErrors(err);
