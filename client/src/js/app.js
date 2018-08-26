@@ -9,8 +9,9 @@ export default class App extends React.Component {
         }
     }
     componentDidMount() {
+
         axios.get('/api/zipcode/87114')
-        .then(function(response) {
+        .then((response) => {
             this.setState({breweries: response});
         });
     }
