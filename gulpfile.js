@@ -16,27 +16,8 @@ var sourcemaps = require('gulp-sourcemaps');
 var rollup = require('rollup-stream');
 var jsx = require('rollup-plugin-jsx-js');
 var babel_rollup = require('rollup-plugin-babel');
-//var nodeResolve = require('rollup-plugin-node-resolve');
-//var commonjs = require('rollup-plugin-commonjs');
 var source = require('vinyl-source-stream');
 var buffer = require('vinyl-buffer');
-
-/* 
-App Structure
-
-|- client/
-    |- public (dist)/
-    |- src/
-        |- js/
-        |- scss/
-        |- css/
-        |- images/
-|- server/
-|- gulpfile.js
-|- node_modules/
-|- package.json
-
-*/
 
 gulp.task('rollup', function () {
     return rollup({
@@ -59,11 +40,6 @@ gulp.task('rollup', function () {
         .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest('client/public/js'));
 });
-
-// gulp.task('sync-js', ['rollup'], function (done) {
-//     browserSync.reload();
-//     done();
-// });
 
 gulp.task('clean:public', function() {
     return del.sync('public');
