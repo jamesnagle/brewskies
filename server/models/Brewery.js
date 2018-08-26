@@ -13,7 +13,7 @@ const brewerySchema = new Schema({
     longitude: String,
     menus: Array,
     name: String,
-    postalCode: String,
+    postalCode: Number,
     province: String,
     twitter: String,
     websites: String
