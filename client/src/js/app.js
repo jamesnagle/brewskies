@@ -33,7 +33,7 @@ class App extends React.Component {
                 <ul>
                     <li>{shitHead}</li>
                     {breweries.map((brewery, i) => (
-                            <li>{brewery.name}</li>
+                            <li key={brewery._id}>{brewery.name}</li>
                     ))}
                 </ul>
             );
