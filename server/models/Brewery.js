@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-const schema = mongoose.Schema({
+const brewerySchema = new Schema({
     id: String,
     address: String,
     categories: String,
@@ -18,6 +19,6 @@ const schema = mongoose.Schema({
     websites: String
 });
 
-const Brewery = mongoose.Model('Brewery', schema);
+const Brewery = mongoose.Model('Brewery', brewerySchema);
 
 module.exports = Brewery;
