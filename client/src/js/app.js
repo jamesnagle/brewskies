@@ -16,12 +16,13 @@ export default class App extends React.Component {
         });
     }
     render() {
+        let list = "";
+        this.state.breweries.map((brewery, i) => {
+            list = list + '<li>' + brewery.name + '</li>';
+        });
         return (
             <ul>
-                {this.state.breweries.map((brewery, i) => {
-                    console.log(brewery.name);
-                    <li key={i}>{brewery.name}</li>
-                })}
+                {list}
             </ul>
         );
     }
