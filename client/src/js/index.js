@@ -1,20 +1,9 @@
-console.log('hello world')
+import React from 'react';
+import ReactDOM from 'react-dom';
 
-const isThisWorking = (str) => {
-    console.log(str)
-}
-isThisWorking('Yes, I am working!')
+import App from './app';
 
-class Tester {
-    constructor(name) {
-        this.name = name;
-    }
-
-    outputMe() {
-        console.log(name)
-    }
-}
-
-let name = new Tester();
-
-name('fred')
+ReactDOM.render(
+    <App />,
+    document.getElementById('root')
+);
