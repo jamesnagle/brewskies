@@ -21,7 +21,9 @@ export default class App extends React.Component {
             <ul>
                 <li>{this.state.shitHead}</li>
                 {this.state && this.state.breweries &&
-                    <li>Loaded</li>
+                    this.state.breweries.map(function(brewery) {
+                        <li key={brewery._id}>{brewery.name}</li>
+                    })
                 }
             </ul>
         );
