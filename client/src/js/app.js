@@ -19,8 +19,8 @@ export default class App extends React.Component {
         console.log(this.state);
         return (
             <ul>
-                {this.state.breweries.forEach((brewery) => {
-                    <li key={brewery.id}>{brewery.name}</li>
+                {this.state.breweries.map((brewery) => {
+                    <li key={brewery._id}>{brewery.name}</li>
                 })}
             </ul>
         );
