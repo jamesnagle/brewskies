@@ -21,7 +21,7 @@ export default class App extends React.Component {
             <ul>
                 <li>{this.state.shitHead}</li>
                 {this.state && this.state.breweries &&
-                    this.state.breweries.map(function(brewery) {
+                    this.state.breweries.forEach(function(brewery, i) {
                         <li>{brewery.name}</li>
                     })
                 }
