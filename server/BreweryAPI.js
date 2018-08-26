@@ -1,4 +1,4 @@
-const Brewery = require('./server/models/Brewery');
+const Brewery = require('./models/Brewery');
 
 class BreweryAPI {
     contructor(mongoose) {
