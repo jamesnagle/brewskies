@@ -22,7 +22,7 @@ export default class App extends React.Component {
         });
         return (
             <ul>
-                {list.forEach((item, key) => {
+                {list.map((item, key) => {
                     <li key={key}>{item}</li>
                 })}
             </ul>
