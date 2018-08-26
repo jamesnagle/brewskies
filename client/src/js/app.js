@@ -18,7 +18,7 @@ export default class App extends React.Component {
     render() {
         return (
             <ul>
-                {this.state.breweries.map((brewery, i) => {
+                {this.props.children.map((brewery, i) => {
                     <li key={brewery._id}>{brewery.name}</li>
                 })}
             </ul>
