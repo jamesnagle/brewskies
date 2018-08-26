@@ -16,14 +16,10 @@ export default class App extends React.Component {
         });
     }
     render() {
-        let list = [1, 2, 3];
-        this.state.breweries.map((brewery, i) => {
-            list = list + '<li>' + brewery.name + '</li>';
-        });
         return (
             <ul>
-                {list.map((item, key) => {
-                    <li key={key}>{item}</li>
+                {this.state.breweries.map((brewery, i) => {
+                    <li key={brewery._id}>{brewery.name}</li>
                 })}
             </ul>
         );
