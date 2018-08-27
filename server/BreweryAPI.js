@@ -13,7 +13,6 @@ class BreweryAPI {
     }
     getByZipcode(req, res) {
         let zipcode = parseInt(req.params.zip);
-        console.log(zipcode);
         
         Brewery.find({postalCode: zipcode}, function(err, breweries) {
             if (err) return this.handleErrors(err);
@@ -23,10 +22,9 @@ class BreweryAPI {
     }
 
     getByState(req, res) {
-        let state = req.params.state;
-        console.log(state);
+        const code = req.params.code;
         
-        Brewery.find({province: state}, function(err, breweries) {
+        Brewery.find({province: code}, function(err, breweries) {
             if (err) return this.handleErrors(err);
             res.setHeader('Content-Type', 'application/json');
             res.send(JSON.stringify(breweries));            

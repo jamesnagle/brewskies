@@ -7,7 +7,9 @@ class CardWrapper extends React.Component {
         super(props);
         this.state = {
             searchResults: [],
-            isLoaded: false
+            isLoaded: false,
+            searchNotRecognized: false,
+            searchHasNoResults: false
         }
     }
     componentWillReceiveProps(nextProps) {
@@ -17,12 +19,41 @@ class CardWrapper extends React.Component {
                 isLoaded: true
             });
         }
+        if (nextProps.searchNotRecognized !== this.props.searchNotRecognized) {
+            this.setState({
+                searchNotRecognized: nextProps.searchNotRecognized
+            });
+        }  
+        if (nextProps.searchHasNoResults !== this.props.searchHasNoResults) {
+            this.setState({
+                searchHasNoResults: nextProps.searchHasNoResults
+            });
+        }        
     }
 
     render() {
-        let { searchResults, isLoaded } = this.state;
+        let { searchResults, isLoaded, searchNotRecognized, searchHasNoResults } = this.state;
+
+        console.log(searchHasNoResults);
+
+        if (searchNotRecognized) {
+            return (
+                <div className="row">
+                    <p>Hmmmm... not sure what you're searching for.</p>
+                    <p>Try a zipcode, state abbreviation, or a full state name.</p>
+                </div>
+            );
+        }
 
         if (isLoaded) {
+            if (searchHasNoResults) {
+                return (
+                    <div className="row">
+                        <p>Shit yo.... We don't seem to have any breweries listed in your area.</p>
+                        <p>Try another search?</p>
+                    </div>
+                );                
+            }
             return (
                 <div className="row">
                     <div>
