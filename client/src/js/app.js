@@ -19,12 +19,26 @@ class App extends React.Component {
     componentDidUpdate(prevProps, prevState) {
         let searchTerm = this.state.searchTerm
         if (prevState.searchTerm !== searchTerm) {
-            this.queryDatabaseByZipCode(searchTerm)
+            if (this.determineSearchType(searchTerm) === 'zip') {
+                this.queryDatabaseByZipCode(searchTerm)
+            } else {
+                this.queryDatabaseByState(searchTerm)
+            }
         }     
     }
 
     queryDatabaseByZipCode(zipcode) {
         axios.get('/api/zipcode/' + zipcode)
+        .then(function (response) {
+            this.setState({
+                isLoaded: true,
+                breweries: response.data
+            });
+        }.bind(this));
+    }
+
+    queryDatabaseByState(state) {
+        axios.get('/api/state/' + state.toUpperCase())
         .then(function (response) {
             this.setState({
                 isLoaded: true,
@@ -39,7 +53,13 @@ class App extends React.Component {
         });
     }
 
-    
+    determineSearchType(searchValue) {
+        if (searchValue.length === 6) {
+            return 'zip';
+        } else {
+            return 'state'
+        }
+    }
     
     render() {
         return (

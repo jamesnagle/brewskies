@@ -1,4 +1,5 @@
 import React from 'react';
+import PreviewCard from './PreviewCard';
 
 
 class CardWrapper extends React.Component {
@@ -24,11 +25,11 @@ class CardWrapper extends React.Component {
         if (isLoaded) {
             return (
                 <div className="row">
-                    <ul>
+                    <div>
                         {searchResults.map((brewery) => (
-                            <li key={brewery._id}>{brewery.name}</li>
+                            <PreviewCard key={brewery._id} brewery={brewery} />
                         ))}
-                    </ul>
+                    </div>
                 </div>
             );
         } else {
