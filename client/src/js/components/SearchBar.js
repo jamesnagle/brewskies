@@ -33,10 +33,10 @@ class SearchBar extends React.Component {
         
         return (
             <div  className="row">
-                <div className="col s10 m10">
+                <div className="col s12 m10">
                     <input key="inputField" onChange={(event)=> this.updateSearchTerm(event)} onKeyPress={(event) => this.zipCodeEventHandler(event)} type="text" placeholder="Enter Zip code or State Name..."></input>
                 </div>
-                <div className="col s2 m2">
+                <div className="col s12 m2">
                     <a href="#!" onClick={() => this.searchButtonHandler(this.state.searchWord)} className="btn waves-effect waves-light">Search</a>
                 </div>
             </div>

@@ -80,8 +80,11 @@ class App extends React.Component {
         });
     }
 
+
+
     determineSearchType(searchValue) {
-        const normalizedSearchValue = searchValue.toUpperCase();
+
+        const normalizedSearchValue = searchValue.trim().replace(/\s+/g, '').toUpperCase();
         const stateNameArray = config.getNormalizedStateNameArray();
         const stateCodeArray = config.getNormalizedStateCodeArray();
 
