@@ -6,7 +6,7 @@ class CardWrapper extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            searchResults: [],
+            searchResults: '',
             isLoaded: false,
             searchNotRecognized: false,
             searchHasNoResults: false
@@ -31,8 +31,16 @@ class CardWrapper extends React.Component {
         }        
     }
 
+    deletePreviewCardHandler(index) {
+        const updatedBrew = this.state.searchResults;
+        updatedBrew.splice(index, 1);
+        this.setState({searchResults: updatedBrew});
+    }
+
     render() {
         let { searchResults, isLoaded, searchNotRecognized, searchHasNoResults } = this.state;
+
+
 
         console.log(searchHasNoResults);
 
@@ -57,8 +65,8 @@ class CardWrapper extends React.Component {
             return (
                 <div className="row">
                     <div>
-                        {searchResults.map((brewery) => (
-                            <PreviewCard key={brewery._id} brewery={brewery} />
+                        {searchResults.map((brewery, index) => (
+                            <PreviewCard clicked={() => this.deletePreviewCardHandler(index)} key={brewery._id} brewery={brewery} />
                         ))}
                     </div>
                 </div>
