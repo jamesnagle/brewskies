@@ -12,6 +12,7 @@ class App extends React.Component {
         this.state = {
             shitHead: 'ReactJS',
             isLoaded: false,
+            isDirty: false,
             searchNotRecognized: false,
             searchHasNoResults: false,
             breweries: [],
@@ -61,6 +62,9 @@ class App extends React.Component {
     }
 
     sendDatabaseQuery(uri) {
+        if (this.state.isDirty === false) {
+            this.setState({isDirty: true});
+        }
         if (this.state.searchNotRecognized === true) {
             this.setState({searchNotRecognized: false});
         }
@@ -69,6 +73,7 @@ class App extends React.Component {
             .then(function (response) {
                 this.setState({
                     isLoaded: true,
+                    isDirty: false,
                     breweries: response.data,
                     searchHasNoResults: (response.data.length === 0) ? true : false
                 });
@@ -116,6 +121,7 @@ class App extends React.Component {
                 <CardWrapper 
                     searchResults={this.state.breweries} 
                     isLoaded={this.state.isLoaded} 
+                    isDirty={this.state.isDirty} 
                     searchNotRecognized={this.state.searchNotRecognized} 
                     searchHasNoResults={this.state.searchHasNoResults}
                 />

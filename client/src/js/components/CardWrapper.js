@@ -1,5 +1,6 @@
 import React from 'react';
 import PreviewCard from './PreviewCard';
+import PreviewCardPlaceholder from './PreviewCardPlaceholder';
 
 
 class CardWrapper extends React.Component {
@@ -8,6 +9,7 @@ class CardWrapper extends React.Component {
         this.state = {
             searchResults: '',
             isLoaded: false,
+            isDirty: false,
             searchNotRecognized: false,
             searchHasNoResults: false
         }
@@ -28,6 +30,11 @@ class CardWrapper extends React.Component {
             this.setState({
                 searchHasNoResults: nextProps.searchHasNoResults
             });
+        }  
+        if (nextProps.isDirty !== this.props.isDirty) {
+            this.setState({
+                isDirty: nextProps.isDirty
+            });
         }        
     }
 
@@ -38,7 +45,7 @@ class CardWrapper extends React.Component {
     }
 
     render() {
-        let { searchResults, isLoaded, searchNotRecognized, searchHasNoResults } = this.state;
+        let { searchResults, isLoaded, isDirty, searchNotRecognized, searchHasNoResults } = this.state;
 
         if (searchNotRecognized) {
             return (
@@ -47,6 +54,14 @@ class CardWrapper extends React.Component {
                     <p>Try a zipcode, state abbreviation, or a full state name.</p>
                 </div>
             );
+        }
+        if (isDirty) {
+            return (
+                <div className="row">
+                    <PreviewCardPlaceholder />
+                    <PreviewCardPlaceholder />
+                </div>
+            )
         }
 
         if (isLoaded) {
