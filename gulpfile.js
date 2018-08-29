@@ -31,7 +31,11 @@ gulp.task('rollup', function () {
         ],
         onwarn: function (data) {
             if (/external dependency/.test(data)) return;
-            console.error(data.message);
+        },
+        globals: {
+            'react': 'React',
+            'react-dom': 'ReactDOM',
+            'axios': 'axios'
         }
     })
         .pipe(source('index.js'))
