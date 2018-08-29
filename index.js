@@ -8,12 +8,15 @@ const db = mongoose.connection;
 
 db.on('error', console.error.bind(console, 'connection error:'));
 
-const BreweryAPI = require('./server/BreweryAPI');
+const BreweriesAPI = require('./server/api/BreweriesAPI');
+const responseAdapter = require('./server/api/responses/JSONResponseAdapter');
+const errorHandlerAdaptor = require('./server/api/errors/ConsoleLogAdapter');
+const breweryModel = require('./server/models/Brewery');
 
 db.once('open', function() {
     app.use(express.static('client/public'));
 
-    const api = new BreweryAPI(mongoose);
+    const api = new BreweriesAPI(responseAdapter, errorHandlerAdaptor, breweryModel);
 
     app.get('/api/breweries', api.getAll);
 

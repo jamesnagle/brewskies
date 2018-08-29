@@ -40,10 +40,6 @@ class CardWrapper extends React.Component {
     render() {
         let { searchResults, isLoaded, searchNotRecognized, searchHasNoResults } = this.state;
 
-
-
-        console.log(searchHasNoResults);
-
         if (searchNotRecognized) {
             return (
                 <div className="row">

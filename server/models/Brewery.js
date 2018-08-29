@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const brewerySchema = new Schema({
+let brewerySchema = new Schema({
     id: String,
     address: String,
     categories: String,
@@ -18,6 +18,18 @@ const brewerySchema = new Schema({
     twitter: String,
     websites: String
 }, {collection: 'breweries'});
+
+brewerySchema.statics.getAll = function(cb) {
+    return this.find({}, cb);
+}
+
+brewerySchema.statics.getByZipcode = function (zipcode, cb) {
+    return this.find({postalCode: zipcode}, cb);
+}
+
+brewerySchema.statics.getByState = function (code, cb) {
+    return this.find({province: code }, cb);
+}
 
 const Brewery = mongoose.model('Brewery', brewerySchema);
 
