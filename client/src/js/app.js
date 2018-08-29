@@ -29,13 +29,14 @@ class App extends React.Component {
         if (prevState.searchTerm !== searchTerm) {
 
             const searchType = this.determineSearchType(searchTerm);
+            const normalizedSearchTerm = searchTerm.trim().toUpperCase();
 
             if (searchType === 'zip') {
-                this.queryDatabaseByZipCode(searchTerm)
+                this.queryDatabaseByZipCode(normalizedSearchTerm)
             } else if (searchType === 'state_code') {
-                this.queryDatabaseByStateCode(searchTerm)
+                this.queryDatabaseByStateCode(normalizedSearchTerm)
             } else if (searchType === 'state_name') {
-                this.queryDatabaseByStateName(searchTerm)
+                this.queryDatabaseByStateName(normalizedSearchTerm)
             } else {
                 this.setState({searchNotRecognized: true});
             }
@@ -47,16 +48,16 @@ class App extends React.Component {
     }
 
     queryDatabaseByStateCode(state) {
-        this.sendDatabaseQuery('/api/state/' + state.toUpperCase());
+        this.sendDatabaseQuery('/api/state/' + state);
     }
 
     queryDatabaseByStateName(state) {
         const states = config.get('States');
 
         const result = states.find(obj => {
-            return obj.name.toUpperCase() === state.toUpperCase()
+            return obj.name.toUpperCase() === state
         });
-        this.sendDatabaseQuery('/api/state/' + result.code.toUpperCase());
+        this.sendDatabaseQuery('/api/state/' + result.code);
     }
 
     sendDatabaseQuery(uri) {
@@ -84,7 +85,7 @@ class App extends React.Component {
 
     determineSearchType(searchValue) {
 
-        const normalizedSearchValue = searchValue.trim().replace(/\s+/g, '').toUpperCase();
+        const normalizedSearchValue = searchValue.trim().toUpperCase();
         const stateNameArray = config.getNormalizedStateNameArray();
         const stateCodeArray = config.getNormalizedStateCodeArray();
 
@@ -92,8 +93,8 @@ class App extends React.Component {
             return 'state_name';
         } else if (stateCodeArray.includes(normalizedSearchValue)) {
             return 'state_code';
-        } else if (searchValue.length === 5) {
-            const checkIsInteger = parseInt(searchValue);
+        } else if (normalizedSearchValue.length === 5) {
+            const checkIsInteger = parseInt(normalizedSearchValue);
             if (!isNaN(checkIsInteger)) {
                 return 'zip';
             }
