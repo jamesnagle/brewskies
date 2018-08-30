@@ -1,19 +1,30 @@
 import React from 'react';
 import PreviewCard from './PreviewCard';
 import PreviewCardPlaceholder from './PreviewCardPlaceholder';
+import BreweryCounter from './BreweryCounter';
 
 
 class CardWrapper extends React.Component {
     constructor(props) {
         super(props);
+
+
         this.state = {
             searchResults: '',
             isLoaded: false,
             isDirty: false,
             searchNotRecognized: false,
-            searchHasNoResults: false
+            searchHasNoResults: false,
+            favorArray: [],
+            isAddedToFavorites: false,
+            disabledClass: '',
+            styles: ''
         }
+
+
     }
+    
+
     componentWillReceiveProps(nextProps) {
         if (nextProps.searchResults !== this.props.searchResults) {
             this.setState({
@@ -38,14 +49,26 @@ class CardWrapper extends React.Component {
         }        
     }
 
+    addToFavorites(index) {
+        const favArr = this.state.favorArray;
+        favArr.push(this.state.searchResults[index]);
+        this.setState({
+            favorArray: favArr,
+        })
+        console.log(this.state.favorArray);
+    }
+
     deletePreviewCardHandler(index) {
         const updatedBrew = this.state.searchResults;
         updatedBrew.splice(index, 1);
-        this.setState({searchResults: updatedBrew});
+        this.setState({
+            searchResults: updatedBrew
+        });
     }
 
     render() {
         let { searchResults, isLoaded, isDirty, searchNotRecognized, searchHasNoResults } = this.state;
+      
 
         if (searchNotRecognized) {
             return (
@@ -76,8 +99,9 @@ class CardWrapper extends React.Component {
             return (
                 <div className="row">
                     <div>
+                        <BreweryCounter brewCounter={this.state.searchResults.length} />
                         {searchResults.map((brewery, index) => (
-                            <PreviewCard clicked={() => this.deletePreviewCardHandler(index)} key={brewery._id} brewery={brewery} />
+                            <PreviewCard fav={()=> this.addToFavorites(index)} clicked={() => this.deletePreviewCardHandler(index)} key={brewery._id} brewery={brewery} />
                         ))}
                     </div>
                 </div>

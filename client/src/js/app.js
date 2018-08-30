@@ -86,8 +86,6 @@ class App extends React.Component {
         });
     }
 
-
-
     determineSearchType(searchValue) {
 
         const normalizedSearchValue = searchValue.trim().toUpperCase();
@@ -114,10 +112,7 @@ class App extends React.Component {
             
             <div className="container">
                 <SearchBar queryDatabaseHandler={this.queryDatabaseHandler.bind(this)}/>
-                <div className="collection">
-                    <a href="#!" className="collection-item"><span className="new badge blue darken-1">{this.state.breweries.length}</span>Breweries Found</a>
-                </div>
-                
+                  
                 <CardWrapper 
                     searchResults={this.state.breweries} 
                     isLoaded={this.state.isLoaded} 
